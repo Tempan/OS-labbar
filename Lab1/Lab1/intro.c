@@ -59,7 +59,6 @@ DWORD WINAPI ThreadWrite( LPVOID lpParam )
 		mailslotWrite(WriteHandle, arr, strlen(arr));
 	}	
 }
-// HEJ VAD FIN DU ÄR I HÅRET :D :D 
 
 int main(int argc, const char* argv[])
 {
