@@ -60,9 +60,6 @@ DWORD WINAPI ThreadWrite( LPVOID lpParam )
 	}	
 }
 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 
 int main(int argc, const char* argv[])
 {
