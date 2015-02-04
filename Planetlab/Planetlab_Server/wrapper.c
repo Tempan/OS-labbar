@@ -19,7 +19,7 @@ HANDLE mailslotCreate (char *name)
 {
 	HANDLE hSlot; // This part is for the Mailslots (Create)
 
-	hSlot = CreateMailslot(name, 
+	hSlot = CreateMailslot((LPCWSTR)name, 
 		0,                             // no maximum message size 
 		MAILSLOT_WAIT_FOREVER,         // no time-out for operations 
 		(LPSECURITY_ATTRIBUTES) NULL); // default security
@@ -34,7 +34,7 @@ HANDLE mailslotCreate (char *name)
 
 HANDLE mailslotConnect (char *name) 
 {
-	HANDLE h = CreateFile(name, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, 
+	HANDLE h = CreateFile((LPCWSTR)name, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, 
 			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (h == INVALID_HANDLE_VALUE)
 	{
