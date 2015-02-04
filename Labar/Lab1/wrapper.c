@@ -34,7 +34,8 @@ HANDLE mailslotCreate (char *name)
 
 HANDLE mailslotConnect (char *name) 
 {
-	HANDLE h = CreateFile(name, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	HANDLE h = CreateFile(name, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, 
+			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (h == INVALID_HANDLE_VALUE)
 	{
 		printf("Couldn't connect to mailslot");
@@ -49,10 +50,10 @@ HANDLE mailslotConnect (char *name)
 int mailslotWrite(HANDLE mailSlot, void *msg, int msgSize) 
 {
 	DWORD cbWritten; 
-	WriteFile(mailSlot, 
-		msg, 
-		msgSize,  
-		&cbWritten, 
+	WriteFile(mailSlot,		//what Mailslot to conect with
+		msg,				//The message
+		msgSize,			//The size
+		&cbWritten,			
 		(LPOVERLAPPED) NULL);
 
 	return 1;
@@ -61,7 +62,7 @@ int mailslotWrite(HANDLE mailSlot, void *msg, int msgSize)
 int	mailslotRead (HANDLE mailbox, void *msg, int msgSize) 
 {
 	DWORD numberBytesRead; 
-	struct pt *pointer;						//Create poiter
+	struct pt *pointer;						//Create poiter to struct
 
 	ReadFile(mailbox, 
 		msg, 
@@ -70,7 +71,7 @@ int	mailslotRead (HANDLE mailbox, void *msg, int msgSize)
 		NULL);
 	pointer = (struct pt*)msg;				//Pointer point at message
 	if(numberBytesRead > 0) 
-		printf("We found this: %.*s", numberBytesRead, pointer->name);
+		printf("We found this: %.*s", numberBytesRead, pointer->name);  //%. *s writes only the message and not the rest in blank spaces.
 
 	return numberBytesRead;
 	/* Read a msg from a mailslot, return nr */

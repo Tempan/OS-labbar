@@ -78,7 +78,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="client.c" />
     <ClCompile Include="intro.c" />
+    <ClCompile Include="server.c" />
     <ClCompile Include="wrapper.c" />
   </ItemGroup>
   <ItemGroup>
