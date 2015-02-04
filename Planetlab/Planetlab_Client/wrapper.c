@@ -7,7 +7,7 @@
 #define DEFAULT_STACK_SIZE	1024
 #define TIME_OUT			MAILSLOT_WAIT_FOREVER 
 
-
+//HEJ
 /* ATTENTION!!! calls that require a time out, use TIME_OUT constant, specifies that calls are blocked forever */
 
 DWORD threadCreate (LPTHREAD_START_ROUTINE threadFunc, LPVOID threadParams) 
