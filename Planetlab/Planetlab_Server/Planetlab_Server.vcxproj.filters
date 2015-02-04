@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\OS-labbar\Labar\Lab1\server.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="server.c">
       <Filter>Source Files</Filter>
     </ClCompile>
