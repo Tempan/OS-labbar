@@ -79,10 +79,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\OS-labbar\Labar\Lab1\server.c" />
-    <ClCompile Include="..\..\OS-labbar\Labar\Lab1\wrapper.c" />
+    <ClCompile Include="server.c" />
+    <ClCompile Include="wrapper.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\OS-labbar\Labar\Lab1\wrapper.h" />
+    <ClInclude Include="wrapper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
