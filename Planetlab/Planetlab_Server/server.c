@@ -70,7 +70,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdL
 	DWORD threadID;
 	MSG msg;
 	
-
 							/* Create the window, 3 last parameters important */
 							/* The tile of the window, the callback function */
 							/* and the backgrond color */
@@ -113,15 +112,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdL
 * NOTE: This function is important to you.                           *
 /********************************************************************/
 DWORD WINAPI mailThread(LPVOID arg) {
-
+	
+	HANDLE WriteHandle;
 	char buffer[1024];
 	DWORD bytesRead;
 	static int posY = 0;
 	HANDLE mailbox;
-
-							/* create a mailslot that clients can use to pass requests through   */
-							/* (the clients use the name below to get contact with the mailslot) */
-							/* NOTE: The name of a mailslot must start with "\\\\.\\mailslot\\"  */
+	LPTSTR Slot = TEXT("\\\\.\\mailslot\\sample_mailslot");
+	WriteHandle = mailslotConnect(Slot);
+					/* create a mailslot that clients can use to pass requests through   */
+					/* (the clients use the name below to get contact with the mailslot) */
+					/* NOTE: The name of a mailslot must start with "\\\\.\\mailslot\\"  */
 
 	
 	mailbox = mailslotCreate ("mailbox");
@@ -206,8 +207,9 @@ LRESULT CALLBACK MainWndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam 
 		case WM_PAINT:
 							/* NOTE: The code for this message can be removed. It's just */
 							/*       for showing something in the window.                */
-			context = BeginPaint( hWnd, &ps ); /* (you can safely remove the following line of code) */
-			TextOut( context, 10, 10, "Hello, World!", 13 ); /* 13 is the string length */
+			context = BeginPaint( hWnd, &ps ); 
+													/* (you can safely remove the following line of code) */
+													//TextOut( context, 10, 10, "Hello, World!", 13 ); /* 13 is the string length */
 			EndPaint( hWnd, &ps );
 			break;
 							/**************************************************************\
