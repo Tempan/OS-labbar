@@ -88,6 +88,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdL
 
 							/* create a thread that can handle incoming client requests */
 							/* (the thread starts executing in the function mailThread) */
+
 							/* NOTE: See online help for details, you need to know how  */ 
 							/*       this function does and what its parameters mean.   */
 							/* We have no parameters to pass, hence NULL				*/
@@ -127,25 +128,28 @@ DWORD WINAPI mailThread(LPVOID arg) {
 	mailbox = mailslotCreate ("mailbox");
 
 
-	for(;;) {				
+	for(;;) 
+	{				
 							/* (ordinary file manipulating functions are used to read from mailslots) */
 							/* in this example the server receives strings from the client side and   */
 							/* displays them in the presentation window                               */
 							/* NOTE: binary data can also be sent and received, e.g. planet structures*/
  
-	bytesRead = mailslotRead (mailbox, buffer, strlen(buffer)); 
+		bytesRead = mailslotRead (mailbox, buffer, strlen(buffer)); 
 
-	if(bytesRead!= 0) {
-							/* NOTE: It is appropriate to replace this code with something */
-							/*       that match your needs here.                           */
-		posY++;  
-							/* (hDC is used reference the previously created window) */							
-		TextOut(hDC, 10, 50+posY%200, buffer, bytesRead);
-	}
-	else {
-							/* failed reading from mailslot                              */
-							/* (in this example we ignore this, and happily continue...) */
-    }
+		if(bytesRead!= 0) 
+		{
+								/* NOTE: It is appropriate to replace this code with something */
+								/*       that match your needs here.                           */
+			posY++;  
+								/* (hDC is used reference the previously created window) */							
+			TextOut(hDC, 10, 50+posY%200, buffer, bytesRead);
+		}
+		else 
+		{
+								/* failed reading from mailslot                              */
+								/* (in this example we ignore this, and happily continue...) */
+		}
   }
 
   return 0;
@@ -203,12 +207,10 @@ LRESULT CALLBACK MainWndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam 
 							*               e.g. when maximizing the window)                 *
 							\****************************************************************/
 
-		case WM_PAINT:
-							/* NOTE: The code for this message can be removed. It's just */
-							/*       for showing something in the window.                */
-			context = BeginPaint( hWnd, &ps ); /* (you can safely remove the following line of code) */
-			TextOut( context, 10, 10, "Hello, World!", 13 ); /* 13 is the string length */
-			EndPaint( hWnd, &ps );
+		case WM_PAINT:  // show something in the window
+															//context = BeginPaint( hWnd, &ps );/* (you can safely remove the following line of code) */
+															//TextOut( context, 10, 10, "Hello, World!", 13 ); /* 13 is the string length */
+															//EndPaint( hWnd, &ps );
 			break;
 							/**************************************************************\
 							*     WM_DESTROY: PostQuitMessage() is called                  *
