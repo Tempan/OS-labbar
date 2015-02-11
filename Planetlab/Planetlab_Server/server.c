@@ -87,6 +87,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdL
 
 							/* create a thread that can handle incoming client requests */
 							/* (the thread starts executing in the function mailThread) */
+
 							/* NOTE: See online help for details, you need to know how  */ 
 							/*       this function does and what its parameters mean.   */
 							/* We have no parameters to pass, hence NULL				*/
@@ -112,7 +113,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdL
 * NOTE: This function is important to you.                           *
 /********************************************************************/
 DWORD WINAPI mailThread(LPVOID arg) {
-	
+
 	HANDLE WriteHandle;
 	char buffer[1024];
 	DWORD bytesRead;
@@ -120,15 +121,16 @@ DWORD WINAPI mailThread(LPVOID arg) {
 	HANDLE mailbox;
 	LPTSTR Slot = TEXT("\\\\.\\mailslot\\sample_mailslot");
 	WriteHandle = mailslotConnect(Slot);
-					/* create a mailslot that clients can use to pass requests through   */
-					/* (the clients use the name below to get contact with the mailslot) */
-					/* NOTE: The name of a mailslot must start with "\\\\.\\mailslot\\"  */
+							/* create a mailslot that clients can use to pass requests through   */
+							/* (the clients use the name below to get contact with the mailslot) */
+							/* NOTE: The name of a mailslot must start with "\\\\.\\mailslot\\"  */
 
 	
 	mailbox = mailslotCreate ("mailbox");
 
 
-	for(;;) {				
+	for(;;) 
+	{				
 							/* (ordinary file manipulating functions are used to read from mailslots) */
 							/* in this example the server receives strings from the client side and   */
 							/* displays them in the presentation window                               */
@@ -136,14 +138,16 @@ DWORD WINAPI mailThread(LPVOID arg) {
  
 	bytesRead = mailslotRead (mailbox, buffer, strlen(buffer)); 
 
-	if(bytesRead!= 0) {
+		if(bytesRead!= 0) 
+		{
 							/* NOTE: It is appropriate to replace this code with something */
 							/*       that match your needs here.                           */
 		posY++;  
 							/* (hDC is used reference the previously created window) */							
 		TextOut(hDC, 10, 50+posY%200, buffer, bytesRead);
 	}
-	else {
+		else 
+		{
 							/* failed reading from mailslot                              */
 							/* (in this example we ignore this, and happily continue...) */
     }
@@ -207,9 +211,8 @@ LRESULT CALLBACK MainWndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam 
 		case WM_PAINT:
 							/* NOTE: The code for this message can be removed. It's just */
 							/*       for showing something in the window.                */
-			context = BeginPaint( hWnd, &ps ); 
-													/* (you can safely remove the following line of code) */
-													//TextOut( context, 10, 10, "Hello, World!", 13 ); /* 13 is the string length */
+			context = BeginPaint( hWnd, &ps ); /* (you can safely remove the following line of code) */
+			TextOut( context, 10, 10, "Hello, World!", 13 ); /* 13 is the string length */
 			EndPaint( hWnd, &ps );
 			break;
 							/**************************************************************\
