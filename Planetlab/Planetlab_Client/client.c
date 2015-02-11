@@ -17,7 +17,8 @@
 
 #define MESSAGE "Hej på dig!"
 
-void main(void) {
+void main(void) 
+{
 
 	HANDLE mailSlot;
 	DWORD bytesWritten;
@@ -25,18 +26,20 @@ void main(void) {
 
 	mailSlot = mailslotConnect("mailbox"); 
 
-	if (mailSlot == INVALID_HANDLE_VALUE) {
+	if (mailSlot == INVALID_HANDLE_VALUE) 
+	{
 		printf("Failed to get a handle to the mailslot!!\nHave you started the server?\n");
 		return;
 	}
 
-						/* NOTE: replace code below for sending planet data to the server. */
-	while(loops-- > 0) {
-						/* send a friendly greeting to the server */
-					/* NOTE: The messages sent to the server need not to be of equal size.       */
-					/* Messages can be of different sizes as long as they don't exceed the       */
-					/* maximum message size that the mailslot can handle (defined upon creation).*/
-    
+	/* NOTE: replace code below for sending planet data to the server. */
+	while(loops-- > 0) 
+	{
+		/* send a friendly greeting to the server */
+		/* NOTE: The messages sent to the server need not to be of equal size.       */
+		/* Messages can be of different sizes as long as they don't exceed the       */
+		/* maximum message size that the mailslot can handle (defined upon creation).*/
+
 		bytesWritten = mailslotWrite (mailSlot, MESSAGE, strlen(MESSAGE));
 		if (bytesWritten!=-1)
 			printf("data sent to server (bytes = %d)\n", bytesWritten);
@@ -46,8 +49,8 @@ void main(void) {
 
 	mailslotClose (mailSlot);
 
-					/* (sleep for a while, enables you to catch a glimpse of what the */
-					/*  client prints on the console)                                 */
+	/* (sleep for a while, enables you to catch a glimpse of what the */
+	/*  client prints on the console)                                 */
 	Sleep(2000);
 	return;
 }
